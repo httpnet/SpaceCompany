@@ -170,6 +170,7 @@ var Game = (function() {
             this.settings.load(data);
         }
         Game.settings.updateCompanyName();
+        Game.settings.updateRead();
         refreshResources();
         refreshResearches();
         refreshTabs();
