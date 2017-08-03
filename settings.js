@@ -16,6 +16,7 @@ Game.settings = (function(){
             notificationsEnabled: true,
             gainButtonsHidden: false,
             redDestroyButtons: false,
+            updateReadHidden: false,
             theme: 'base',
             autoSaveInterval: 30 * 1000
         },
@@ -229,6 +230,11 @@ Game.settings = (function(){
                 }
             }
         });
+        
+        $('#updateReadHidden').change(function(){
+            Game.settings.set('updateReadHidden', $(this).is(':checked'));
+            Game.settings.updateRead();
+        }
 
         if(contains(researched, "unlockDestruction")){
             if(Game.settings.entries.redDestroyButtons === true){
@@ -276,6 +282,16 @@ Game.settings = (function(){
 
     instance.updateCompanyName = function(){
         document.getElementById("companyName").innerHTML = companyName;
+    }
+
+    instance.updateRead = function(){
+        if(Game.updateRead){
+            if(Game.settings.entries.updateReadHidden){
+                document.getElementById("updateAlert").className = "hidden";
+            } else {
+                document.getElementById("updateAlert").className = "";
+            }
+        }
     }
 
     return instance;
